@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<style name="AppCardView" parent="@style/CardView.Light">-->
+        <!--<item name="cardPreventCornerOverlap">false</item>-->
+        <!--<item name="cardUseCompatPadding">true</item>-->
+        <!--<item name="android:foreground">?attr/selectableItemBackground</item>-->
+        <!--<item name="android:stateListAnimator" tools:targetApi="lollipop">@anim/lift_up</item>-->
+    <!--</style>-->
+</resources>
