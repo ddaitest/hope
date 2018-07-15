@@ -1,6 +1,7 @@
 package com.daivp.hope
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,16 +18,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            val body = FormBody.Builder()
-            body.add("start_at", "xx")
-            body.add("end_at", "yy")
-            body.add("departure", (System.currentTimeMillis()/1000).toString())
-            body.add("quota", "1")
-            body.add("remark", "abc")
-            Request.Builder()
-                    .url("$domain/hope/add_task_api/")
-                    .post(body.build())
-                    .build().go()
+//            val body = FormBody.Builder()
+//            body.add("start_at", "xx")
+//            body.add("end_at", "yy")
+//            body.add("departure", (System.currentTimeMillis()/1000).toString())
+//            body.add("quota", "1")
+//            body.add("remark", "abc")
+//            Request.Builder()
+//                    .url("$domain/hope/add_task_api/")
+//                    .post(body.build())
+//                    .build().go()
+            Snackbar.make(cl_3, "message_text", Snackbar.LENGTH_SHORT)
+                    .setAction("action_text"){
+                        Log.d("DDAI","click!!!")
+                    }
+                    .show()
         }
         button2.setOnClickListener {
             Request.Builder()

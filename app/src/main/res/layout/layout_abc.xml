@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_header"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_aaa" />
+
+    <TextView
+        android:id="@+id/header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="#313131"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="Joythi Dahiya"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/image_header"
+
+        />
+
+    <TextView
+        android:id="@+id/header_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#999999"
+        android:textSize="10sp"
+        android:text="xxxxx"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/image_header"
+        app:layout_constraintBottom_toBottomOf="@+id/image_header"
+
+
+        />
+</android.support.constraint.ConstraintLayout>
