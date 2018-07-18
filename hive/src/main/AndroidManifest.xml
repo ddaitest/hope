@@ -15,17 +15,23 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ButtonsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".AnimActivity" />
-        <activity android:name=".TestActivity"></activity>
-        <activity android:name=".TestButtonActivity">
+        <activity android:name=".TestActivity" />
+        <activity android:name=".TestButtonActivity"></activity>
+        <activity android:name=".SuperLikeActivity"></activity>
+        <activity android:name=".DiscoverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SuperLikeActivity">
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/FullscreenTheme">
 
 
         </activity>

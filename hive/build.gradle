@@ -57,7 +57,7 @@ dependencies {
     api deps.fresco.animated_webp
     api deps.fresco.webpsupport
     api deps.fresco.animated_gif
-    api (deps.fresco.imagepipeline) {
-        exclude group : 'com.squareup.okhttp3'
+    api(deps.fresco.imagepipeline) {
+        exclude group: 'com.squareup.okhttp3'
     }
 }
