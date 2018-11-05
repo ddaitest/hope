@@ -14,9 +14,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import com.daivp.hope.common.BasePopupWindow
+import com.daivp.hope.common.TimeUtil
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -77,16 +80,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.find_passenger -> {
                 // Handle the camera action
-            }
-            R.id.find_driver -> {
 
             }
+//            R.id.find_driver -> {
+//
+//            }
             R.id.publish_driver -> {
-                startActivity(Intent(this@HomeActivity, PublishActivity::class.java))
+                startActivityForResult(Intent(this@HomeActivity, PublishActivity::class.java), 1)
             }
-            R.id.publish_passenger -> {
-                startActivity(Intent(this@HomeActivity, PublishActivity::class.java))
-            }
+//            R.id.publish_passenger -> {
+////                startActivity(Intent(this@HomeActivity, PublishActivity::class.java))
+//            }
             R.id.nav_share -> {
 
             }
@@ -97,6 +101,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == 1) {
+            viewModel.load()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -126,13 +137,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     class HomeAdapter(private val inflater: LayoutInflater, private var items: ArrayList<Task> = ArrayList(), private val listener: (Task) -> Unit) : RecyclerView.Adapter<HomeAdapter.MyHolder>() {
-        private val format = SimpleDateFormat("MM月dd日 HH:mm:ss", Locale.CHINA)
+//        private val format = SimpleDateFormat(TimeUtil.viewFormat, Locale.CHINA)
 
         override fun onBindViewHolder(holder: MyHolder, position: Int) {
             val item = items[position]
-            holder.from.text = item.start
-            holder.to.text = item.end
-            holder.time.text = format.format(Date(item.time))
+            holder.from.text = item.addr_start
+            holder.to.text = item.addr_end
+            holder.time.text = TimeUtil.s2v(item.time_start)
             holder.remark.text = item.remark
             holder.itemView.setOnClickListener { listener.invoke(items[position]) }
         }
@@ -155,7 +166,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     return items[oldItemPosition] == newItems[newItemPosition]
                 }
 
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = items[oldItemPosition].id == (newItems[newItemPosition].id)
+                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = items[oldItemPosition].mobile == (newItems[newItemPosition].mobile)
             }).apply {
                 dispatchUpdatesTo(this@HomeAdapter)
             }
@@ -173,19 +184,26 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 }
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
+
     val tasks = MutableLiveData<List<Task>>().also { it.value = ArrayList() }
     val loading = MutableLiveData<Boolean>().also { it.value = false }
 
     fun load() {
-        thread {
-            Thread.sleep(2000)
-            val ts = ArrayList<Task>()
-            (1..10).forEach {
-                ts.add(Task("", "北京$it", "固安$it", System.currentTimeMillis(), "hahah..."))
-            }
-            tasks.postValue(tasks.value?.plus(ts))
+        loading.postValue(true)
+        APIManager.list(1, 20, success = {
+            Log.w("DDAI", "success @ ${it.toString()}")
             loading.postValue(false)
-        }
+            val tmp = ArrayList<Task>()
+            it.optJSONObject("data")?.optJSONObject("list")?.let { list ->
+                list.keys().forEach {
+                    tmp.add(Gson().fromJson(list.getJSONObject(it).toString(), Task::class.java))
+                }
+            }
+            tasks.postValue(tmp)
+        }, fail = {
+            Log.w("DDAI", "fail @ list")
+            loading.postValue(false)
+        })
 
     }
 }

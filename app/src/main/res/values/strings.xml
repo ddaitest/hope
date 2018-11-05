@@ -25,6 +25,7 @@
         completions."
     </string>
     <string name="publish">发布</string>
+    <string name="prompt_mobile">手机号</string>
     <string name="prompt_start">起点</string>
     <string name="prompt_end">终点</string>
     <string name="prompt_quota">座位</string>

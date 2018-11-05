@@ -8,18 +8,18 @@
             android:id="@+id/find_passenger"
             android:icon="@drawable/ic_menu_camera"
             android:title="车找人" />
-        <item
-            android:id="@+id/find_driver"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="人找车" />
+        <!--<item-->
+            <!--android:id="@+id/find_driver"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="人找车" />-->
         <item
             android:id="@+id/publish_driver"
             android:icon="@drawable/ic_menu_send"
             android:title="发布找人" />
-        <item
-            android:id="@+id/publish_passenger"
-            android:icon="@drawable/ic_menu_send"
-            android:title="发布找车" />
+        <!--<item-->
+            <!--android:id="@+id/publish_passenger"-->
+            <!--android:icon="@drawable/ic_menu_send"-->
+            <!--android:title="发布找车" />-->
     </group>
 
     <item android:title="@string/other">

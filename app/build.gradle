@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.daivp.hope"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -42,4 +42,7 @@ dependencies {
     kapt deps.room.compiler
 
     implementation deps.lottie
+    implementation "com.google.code.gson:gson:2.8.4"
+    implementation deps.stetho.base
+    implementation deps.stetho.support_okhttp3
 }

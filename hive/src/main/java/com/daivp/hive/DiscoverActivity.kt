@@ -29,7 +29,7 @@ class DiscoverActivity : AppCompatActivity() {
         tl_tab.tabMode = TabLayout.MODE_SCROLLABLE
         tl_tab.setTabTextColors(R.color.colorPrimary, R.color.colorAccent)
         tl_tab.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
-        ViewCompat.setElevation(tl_tab, 10F)
+//        ViewCompat.setElevation(tl_tab, 10F)
         tl_tab.setupWithViewPager(vp_content)
         button_add.setOnClickListener {
             adapter.add("_" + flag++)
@@ -47,15 +47,31 @@ class DiscoverActivity : AppCompatActivity() {
                 View.GONE
             }
             if (test_bottom_layout.visibility != shown) {
-                TransitionManager.beginDelayedTransition(test_bottom_layout, ChangeClipBounds())
+                TransitionManager.beginDelayedTransition(test_bottom_layout)
                 test_bottom_layout.visibility = shown
             }
 
+            if (verticalOffset == 0) {
+                test_search2.visibility = View.VISIBLE
+            } else {
+                test_search2.visibility = View.INVISIBLE
+            }
+
+        }
+        test_refresh_layout.setHeaderInsetStart(80F)
+        test_part1.setOnClickListener {
+            val test = Test("xxx")
+            test.javaClass.annotations.forEach {
+                if (it is PageName) {
+                    Log.d("DDAI", "PageName=${it.value}")
+                }
+            }
         }
     }
-
-
 }
+
+@PageName("DAI")
+class Test(val a: String)
 
 class ContentPagerAdapter(private val tabs: ArrayList<String>, manager: FragmentManager) : FragmentPagerAdapter(manager) {
     override fun getItem(position: Int): Fragment {
@@ -78,6 +94,5 @@ class ContentPagerAdapter(private val tabs: ArrayList<String>, manager: Fragment
         tabs.add(tab)
         notifyDataSetChanged()
     }
-
 }
 

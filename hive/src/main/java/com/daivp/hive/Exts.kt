@@ -13,3 +13,8 @@ inline fun Activity.runPermission(p: String, t: () -> Unit) {
     }
 
 }
+
+//@Retention(RetentionPolicy.RUNTIME)
+@Retention()
+@kotlin.annotation.Target(AnnotationTarget.CLASS)
+annotation class PageName(val value: String = "")
